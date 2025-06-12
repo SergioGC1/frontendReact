@@ -1,49 +1,64 @@
-// frontend/src/components/EditarTarea.jsx
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function EditarTarea() {
-    const [titulo, setTitulo] = useState("");
-    const [descripcion, setDescripcion] = useState("");
     const { id } = useParams();
     const navigate = useNavigate();
     const token = localStorage.getItem("access");
 
+    const [titulo, setTitulo] = useState("");
+    const [descripcion, setDescripcion] = useState("");
+
     useEffect(() => {
         axios.get(`http://localhost:8000/api/tareas/${id}/`, {
-            headers: { Authorization: `Bearer ${token}` }
-        }).then(res => {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        .then((res) => {
             setTitulo(res.data.titulo);
             setDescripcion(res.data.descripcion);
-        }).catch(err => {
-            console.error("❌ Error al cargar la tarea", err);
+        })
+        .catch((err) => {
+            console.error("Error cargando tarea", err);
+            alert("❌ No se pudo cargar la tarea");
         });
     }, [id]);
 
-    const manejarActualizacion = async (e) => {
+    const manejarSubmit = async (e) => {
         e.preventDefault();
         try {
             await axios.put(`http://localhost:8000/api/tareas/${id}/`, {
                 titulo,
-                descripcion
+                descripcion,
             }, {
-                headers: { Authorization: `Bearer ${token}` }
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             });
-            alert("✅ Tarea actualizada");
-            navigate("/");
+            alert("✅ Tarea actualizada correctamente");
+            navigate("/tareas");
         } catch (err) {
-            alert("❌ Error al actualizar tarea");
+            alert("❌ Error al actualizar la tarea");
             console.error(err);
         }
     };
 
     return (
-        <form onSubmit={manejarActualizacion}>
+        <form onSubmit={manejarSubmit}>
             <h2>Editar tarea</h2>
-            <input value={titulo} onChange={e => setTitulo(e.target.value)} required />
+            <input
+                type="text"
+                value={titulo}
+                onChange={(e) => setTitulo(e.target.value)}
+                required
+            />
             <br />
-            <textarea value={descripcion} onChange={e => setDescripcion(e.target.value)} />
+            <textarea
+                value={descripcion}
+                onChange={(e) => setDescripcion(e.target.value)}
+            />
             <br />
             <button type="submit">Guardar cambios</button>
         </form>
