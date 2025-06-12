@@ -1,11 +1,12 @@
-// frontend/src/components/Login.jsx
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
     const [usuario, setUsuario] = useState('');
     const [contrasena, setContrasena] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const manejarLogin = async (e) => {
         e.preventDefault();
@@ -18,8 +19,9 @@ export default function Login() {
             localStorage.setItem('refresh', respuesta.data.refresh);
             setError('');
             alert('¡Inicio de sesión exitoso!');
+            navigate('/tareas');
         } catch (err) {
-            console.error(err.response.data);
+            console.error(err.response?.data || err.message);
             setError('Credenciales incorrectas');
         }
     };
