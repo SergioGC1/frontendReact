@@ -170,7 +170,7 @@ export default function TareasPage() {
             <div
                 style={{
                     width: "100%",
-                    padding: "0", // Sin margen lateral
+                    padding: "0",
                     boxSizing: "border-box",
                 }}
             >

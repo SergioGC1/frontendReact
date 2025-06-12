@@ -1,28 +1,26 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./components/Login";
-import CrearTarea from "./components/CrearTarea";
-import ListaTareas from "./components/ListaTareas";
-import EditarTarea from "./components/EditarTarea";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import RutaPrivada from "./components/RutaPrivada";
 import Registro from "./components/Registro";
 import TareasPage from "./pages/TareasPage";
+import AuthPage from "./pages/AuthPages";
+import TareaFormPage from "./pages/TareaFormPage";
 
 
 export default function App() {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<Login />} />
+                <Route path="/" element={<AuthPage />} />
                 <Route path="/registro" element={<Registro />} />
                 <Route path="/tareas" element={<TareasPage />} />
                 <Route path="/crear" element={
                     <RutaPrivada>
-                        <CrearTarea />
+                        <TareaFormPage />
                     </RutaPrivada>
                 } />
                 <Route path="/editar/:id" element={
                     <RutaPrivada>
-                        <EditarTarea />
+                        <TareaFormPage />
                     </RutaPrivada>
                 } />
             </Routes>
