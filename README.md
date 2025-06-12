@@ -1,12 +1,21 @@
-# React + Vite
+### Frontend (React + Vite + JWT)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+```markdown
+# Frontend – React que consuma la API del backend
 
-Currently, two official plugins are available:
+## Tecnología
+- React + React Router + Axios + Vite
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ Instalación local
+1. Clona el repo y entra en `frontend/`.
+2. Ejecuta:
+   ```bash
+   npm install
+   npm run dev
+3. Abre http://localhost:5173/.
 
-## Expanding the ESLint configuration
+⚙️ Configuración
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+    Login: email y password; guarda access/refresh en localStorage.
+
+    HTTP Authorization: Bearer <token>.
