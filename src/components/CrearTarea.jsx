@@ -1,17 +1,17 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function CrearTarea() {
     const [titulo, setTitulo] = useState("");
     const [descripcion, setDescripcion] = useState("");
-
+    const navigate = useNavigate();
+    const token = localStorage.getItem("access");
 
     const manejarSubmit = async (e) => {
-        const token = localStorage.getItem("access"); // Cambiado de "token" a "access"
-        console.log("Token:", token);
         e.preventDefault();
         try {
-            const respuesta = await axios.post(
+            await axios.post(
                 "http://localhost:8000/api/tareas/",
                 { titulo, descripcion },
                 {
@@ -21,7 +21,7 @@ export default function CrearTarea() {
                 }
             );
             alert("✅ Tarea creada correctamente");
-            console.log(respuesta.data);
+            navigate("/tareas");
         } catch (err) {
             alert("❌ Error al crear tarea");
             console.error(err);
@@ -46,6 +46,9 @@ export default function CrearTarea() {
             />
             <br />
             <button type="submit">Crear</button>
+            <button type="button" onClick={() => navigate("/tareas")}>
+                Cancelar
+            </button>
         </form>
     );
 }

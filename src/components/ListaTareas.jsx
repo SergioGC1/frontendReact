@@ -32,9 +32,24 @@ export default function ListaTareas() {
             console.error(err);
         }
     };
+    <button onClick={() => {
+    localStorage.removeItem("access");
+    localStorage.removeItem("refresh");
+    window.location.href = "/";
+    }}>
+        🚪 Cerrar sesión
+    </button>
 
     return (
         <div>
+            <button onClick={() => navigate("/crear")}>➕ Crear tarea</button>
+            <button onClick={() => {
+                localStorage.removeItem("access");
+                localStorage.removeItem("refresh");
+                window.location.href = "/";
+            }}>
+                🚪 Cerrar sesión
+            </button>
             <h2>Mis tareas</h2>
             <ul>
                 {tareas.map((tarea) => (
